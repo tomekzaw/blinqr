@@ -40,7 +40,7 @@ def calculate_sha1(data: bytes) -> str:
     return m.hexdigest()
 
 
-def send(data: bytes, block_size: int = 2350):
+def send(data: bytes, *, block_size: int = 2350):
     assert block_size <= 2350
 
     sha1 = calculate_sha1(data)
@@ -83,17 +83,16 @@ def receive():
 
             if decoded_qrs:
                 for decoded_qr in decoded_qrs:
-                    empty = False
-                    data_encoded = decoded_qr.data
-
                     polygon = tuple(decoded_qr.polygon)
                     for p1, p2 in zip(polygon, (*polygon[1:], polygon[0])):
                         cv2.line(img, (p1.x, p1.y), (p2.x, p2.y), (255, 0, 0), 3)
 
+                    data_encoded = decoded_qr.data
                     data_decoded = b85decode(data_encoded)
 
                     block = decode.block_from_bytes(data_decoded)
                     ltDecoder.consume_block(block)
+                    empty = False
 
                     if ltDecoder.is_done():
                         data = ltDecoder.bytes_dump()
