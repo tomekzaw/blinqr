@@ -31,7 +31,7 @@ pip install -r requirements.txt
 5. Point the camera at the computer screen. Try to keep QR codes in the frame. Each time a QR code is detected, a blue border will appear. Don't worry about dropped frames – blinqr also encodes data using fountain code. That allows data to be recovered from any feasible subset of transmitted QR codes.
 6. Wait until the file is received. Transfer speed is about 5 kB/s, but it strongly depends on the computational capabilities of your computer.
 7. When the transfer is complete, compare SHA-1 hashes calculated both by sender and receiver for the sake of certainty.
-8. Press `q` to exit.
+8. Press <kbd>q</kbd> to exit.
 
 ## Further development
 
